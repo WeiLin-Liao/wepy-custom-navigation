@@ -1,0 +1,30 @@
+ <template>
+  <view class="page">
+    <header-nav title="测试"></header-nav>
+    <view class="container">
+      <navigator url="./demo" target="self" open-type="navigate">点击跳转</navigator>
+    </view>
+  </view>
+ </template>
+
+ <script>
+  import wepy from 'wepy';
+  import headerNav from '@/components/navigation-bar';
+
+  export default class Index extends wepy.page {
+    config = {}
+    data = {}
+    components = {
+      'header-nav': headerNav
+    }
+  }
+ </script>
+
+ <style lang="less">
+  .container {
+    navigator {
+      display: inline-block;
+      color: blue;
+    }
+  }
+ </style>

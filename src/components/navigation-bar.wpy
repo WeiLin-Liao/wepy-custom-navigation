@@ -1,0 +1,107 @@
+<template>
+  <view class="header">
+    <view
+      class="header-bar"
+      style="padding-top:{{statusBarHeight}}px;color:{{color}};background:{{background}};height:{{navigationBarHeight}}px;">
+      <view class="left">
+        <image wx:if="{{showBack}}" @tap.stop="goBack" class="icon back-icon" src="/images/common/navbar-back-icon.png" />
+        <image wx:if="{{showHome}}" @tap.stop="goHome" class="icon home-icon" src="/images/common/navbar-home-icon.png" />
+      </view>
+      <view class="center" wx:if="{{title}}">
+        <view class="title">{{title}}</view>
+      </view>
+      <view class="right"></view>
+    </view>
+    <view style="height:{{navigationBarHeight}}px;"></view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class NavigationBar extends wepy.component {
+    data = {
+      statusBarHeight: 0,
+      navigationBarHeight: 0,
+      showBack: false
+    }
+    props = {
+      title: {
+        type: String,
+        default: ''
+      },
+      background: {
+        type: String,
+        default: '#ffffff'
+      },
+      color: {
+        type: String,
+        default: '#333333'
+      },
+      showHome: {
+        type: Boolean,
+        default: false
+      }
+    }
+    onLoad() {
+      this.init();
+    }
+    init() {
+      const global = wepy.$instance.globalData;
+      this.statusBarHeight = global.statusBarHeight;
+      this.navigationBarHeight = global.navigationBarHeight;
+      this.showBack = this.computedIsShowBack();
+      this.$apply();
+    }
+    // 计算是否显示back按钮
+    computedIsShowBack() {
+      const page = getCurrentPages();
+      console.log(page[page.length - 1].route);
+      if(page.length - 1 > 0) {
+        return true
+      }else {
+        return false
+      }
+    }
+    methods = {
+      goBack() {
+        wepy.navigateBack()
+      },
+      goHome() {
+        wepy.reLaunch({
+          url: "/pages/index"
+        });
+      }
+    }
+  }
+</script>
+
+<style lang="less" scoped>
+  .header-bar {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    top: 0;
+    font-size: 28rpx;
+    align-items: center;
+    box-sizing: border-box;
+  }
+  .icon {
+    width: 40rpx;
+    height: 37rpx;
+  }
+  .home-icon {
+    margin-left: 30rpx;
+  }
+  .left,
+  .right {
+    flex: 1;
+  }
+  .left {
+    margin-left: 10rpx;
+  }
+  .center {
+    flex: auto;
+    text-align: center;
+  }
+</style>

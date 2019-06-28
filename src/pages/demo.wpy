@@ -1,0 +1,25 @@
+<template>
+  <view class="page">
+    <header-nav title="我是标题" :showHome="showHome"></header-nav>
+    <view class="container">
+      Helo World!
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+  import headerNav from '@/components/navigation-bar';
+
+  export default class Demo extends wepy.page {
+    data = {
+      showHome: true
+    }
+    components = {
+      'header-nav': headerNav
+    }
+  }
+</script>
+
+<style lang="less">
+</style>

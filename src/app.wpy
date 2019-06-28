@@ -1,0 +1,54 @@
+<style lang="less">
+  .container {
+    margin: 200rpx auto 0;
+    font-size: 30rpx;
+    text-align: center;
+  }
+</style>
+
+<script>
+  import wepy from 'wepy';
+  import 'wepy-async-function';
+
+  export default class extends wepy.app {
+    config = {
+      pages: [
+        "pages/index",
+        "pages/demo"
+      ],
+      window: {
+        navigationStyle: 'custom',
+        backgroundTextStyle: 'light',
+        navigationBarTextStyle: 'black'
+        // navigationBarBackgroundColor: '#fff',
+        // navigationBarTitleText: 'weChat',
+      }
+    }
+    constructor () {
+      super()
+      this.use('requestfix');
+      this.use('promisify');
+    }
+    onLaunch() {
+      wepy.getSystemInfo()
+      .then(res => {
+        this.globalData.systemInfo = res;
+        this.globalData.statusBarHeight = res.statusBarHeight;
+        this.globalData.navigationBarHeight = res.statusBarHeight + this.computedNavHeight();
+      })
+    }
+    // 计算导航栏的高度
+    computedNavHeight() {
+      if(this.globalData.systemInfo.system.indexOf('iOS') != -1) {
+        return 32 + 6 * 2
+      }else {
+        return 32 + 8 * 2
+      }
+    }
+    globalData = {
+      systemInfo: null,
+      statusBarHeight: null,
+      navigationBarHeight: null
+    }
+  }
+</script>
