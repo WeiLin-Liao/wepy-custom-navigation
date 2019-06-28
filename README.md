@@ -27,4 +27,4 @@ npm run dev || wepy build --watch
 
 ## 联系方式
 - 📧 电子邮件: 2476127622@qq.com
-- 🐧 QQ交流群: 240491909
+- 🐧 QQ交流群: <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=6aa387c1738b5fd614b9971bf976ff3cde84e49f6a918316cf635e83a7c0d418"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="小白菜技术交流群" title="小白菜技术交流群">240491909</a>
